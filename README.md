@@ -18,7 +18,7 @@ In order to use the image, you need to build it first.
 
 3. Now you can run the image. <br>
 Don't forget to replace `<YOUR-DEVICE-TOKEN>` with the specific device token you got from Cloud4Rpi <br>
-`sudo docker run --name c4rpi -e TOKEN=<YOUR-DEVICE-TOKEN> --hostname $(hostname) --restart unless-stopped cloud4rpi`
+`sudo docker run -d --name c4rpi -e TOKEN=<YOUR-DEVICE-TOKEN> --hostname $(hostname) --restart unless-stopped cloud4rpi`
 The docker container will run at startup, unless you stop it.
 
 4. Check at Cloud4Rpi site to see if you device's info shows up. If so, you can create dashboards and alerts as you wish.
