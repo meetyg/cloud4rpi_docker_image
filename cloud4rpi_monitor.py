@@ -23,6 +23,7 @@ POLL_INTERVAL = 0.5  # 500 ms
 #GPIO.setup(LED_PIN, GPIO.OUT)
 
 
+
 # Handler for the button or switch variable
 def led_control(value=None):
 #    GPIO.output(LED_PIN, value)
@@ -30,26 +31,29 @@ def led_control(value=None):
      pass
 
 def cpu_percent(value=None):
-	return psutil.cpu_percent(interval=1)
+        return psutil.cpu_percent(interval=1)
 
 def cpu_freq(value=None):
-	freq_tuple = psutil.cpu_freq()
-	return freq_tuple.current
-	
+        freq_tuple = psutil.cpu_freq()
+        return freq_tuple.current
+
 def mem_percent(value=None):
-	mem = psutil.virtual_memory()
-	return mem.percent
+        mem = psutil.virtual_memory()
+        return mem.percent
 
 def swap_percent(value=None):
-	swap = psutil.swap_memory()
-	return swap.percent
-	
+        swap = psutil.swap_memory()
+        return swap.percent
+
 def disk_percent(value=None):
-	disk = psutil.disk_usage('/')
-	return disk.percent
+        disk = psutil.disk_usage('/')
+        return disk.percent
+
+def cpu_temp(value=None):
+        return psutil.sensors_temperatures()['cpu-thermal'][0].current
 
 def main():
-   
+
     variables = {
  #        'LED On': {
 #            'type': 'bool',
@@ -58,7 +62,7 @@ def main():
 #        },
         'CPU Temp': {
             'type': 'numeric',
-            'bind': rpi.cpu_temp
+            'bind': cpu_temp
         },
 		'CPU %': {
 		'type' : 'numeric',
