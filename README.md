@@ -31,8 +31,11 @@ Odroid testing to come soon!
 #### License
 Feel free to clone this repo and change the monitoring script `cloud4rpi_monitor.py` or the Dockerfile as you wish.
 If you run into any problems open an issue, and I'll try to help as best as I can.
-** Use this at your own risk! ** 
+Please see the Cloud4Rpi licenses and terms/conditions.
+
+#### Disclaimer
+**Use this at your own risk!** <br>
 I do not take any responsability what so ever...
 
-Please see the Cloud4Rpi licenses and terms/conditions
+
 
