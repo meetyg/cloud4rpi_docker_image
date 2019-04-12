@@ -10,7 +10,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Remove dependencies previously installed
-RUN apk remove py-configobj libusb py-pip python-dev gcc linux-headers musl-dev && apk clean cache
+RUN apk del py-configobj libusb py-pip python-dev gcc linux-headers musl-dev && apk clean cache
 
 COPY *.py ./
 
