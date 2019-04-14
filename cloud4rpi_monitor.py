@@ -7,6 +7,10 @@ import cloud4rpi
 import psutil
 import rpi
 import os
+import re
+from statistics import mean
+pattern = re.compile("^cpu[0-9]?\-thermal$")
+
 #import RPi.GPIO as GPIO  # pylint: disable=F0401
 
 # Put your device token here. To get the token,
@@ -50,7 +54,13 @@ def disk_percent(value=None):
         return disk.percent
 
 def cpu_temp(value=None):
-        return psutil.sensors_temperatures()['cpu-thermal'][0].current
+        temps = psutil.sensors_temperatures()
+        temp_values_arr = []
+        for temp_key, temp_val in temps.items():
+                if (pattern.match(temp_key)):
+                        temp_values_arr.append(temp_val[0].current)
+        return mean(temp_values_arr)
+
 
 def main():
 
@@ -64,34 +74,34 @@ def main():
             'type': 'numeric',
             'bind': cpu_temp
         },
-		'CPU %': {
-		'type' : 'numeric',
-		'bind' : cpu_percent
-		},
-		'CPU freq' : {
-		'type' : 'numeric',
-		'bind' : cpu_freq
-		},
-		'Memory Usage %': {
-		'type' : 'numeric',
-		'bind' : mem_percent
-		},
-		'Swap Usage %': {
-		'type' : 'numeric',
-		'bind' : swap_percent
-		},
-		'Disk Usage %': {
-		'type' : 'numeric',
-		'bind' : disk_percent
-		}
+                'CPU %': {
+                'type' : 'numeric',
+                'bind' : cpu_percent
+                },
+                'CPU freq' : {
+                'type' : 'numeric',
+                'bind' : cpu_freq
+                },
+                'Memory Usage %': {
+                'type' : 'numeric',
+                'bind' : mem_percent
+                },
+                'Swap Usage %': {
+                'type' : 'numeric',
+                'bind' : swap_percent
+                },
+                'Disk Usage %': {
+                'type' : 'numeric',
+                'bind' : disk_percent
+                }
 
-		
+
     }
 
     diagnostics = {
         'IP Address': rpi.ip_address,
         'Host': rpi.host_name,
-        'Operating System': rpi.os_name		
+        'Operating System': rpi.os_name
     }
     device = cloud4rpi.connect(DEVICE_TOKEN)
 
