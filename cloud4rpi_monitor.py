@@ -9,7 +9,7 @@ import rpi
 import os
 import re
 from statistics import mean
-pattern = re.compile("^cpu[0-9]?\-thermal$")
+pattern = re.compile("^cpu[0-9]?|soc\-thermal$")
 
 #import RPi.GPIO as GPIO  # pylint: disable=F0401
 
@@ -20,7 +20,7 @@ DEVICE_TOKEN = os.environ['TOKEN']
 # Constants
 DATA_SENDING_INTERVAL = 30  # secs
 DIAG_SENDING_INTERVAL = 60  # secs
-POLL_INTERVAL = 0.5  # 500 ms
+POLL_INTERVAL = 1.5  # 500 ms
 
 # Configure GPIO library
 #GPIO.setmode(GPIO.BOARD)
