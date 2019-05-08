@@ -1,11 +1,18 @@
-### Docker Image for running Cloud4RPi (https://cloud4rpi.io/) monitoring script on SBCs
+## Docker Image for running Cloud4RPi (https://cloud4rpi.io/) monitoring script on SBCs
 ---
-#### Prerequisites:
+### Prerequisites:
 - Register at Cloud4rpi (https://cloud4rpi.io/)
 - In Cloud4Rpi site add a new device and get a device TOKEN (do this for each device you want to monitor on Cloud4Rpi)
 - On your SBC (Raspberry pi, Odroid etc...) make sure you have docker installed.
 
-#### Usage:
+### Usage:
+You can pull this image from docker hub (https://hub.docker.com/r/meetyg/cloud4rpi), or build it yourself (usefull for customization).
+
+#### Run it:
+`sudo docker run -d --name c4rpi -e TOKEN=<YOUR-DEVICE-TOKEN> --hostname $(hostname) --restart unless-stopped meetyg/cloud4rpi`
+
+#### Build it yourself:
+
 In order to use the image, you need to build it first.
 **Please note:** Building the docker image should be on your SBC.
 
