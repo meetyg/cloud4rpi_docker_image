@@ -32,8 +32,10 @@ The docker container will run at startup, unless you stop it.
 If it doesn't show up, check the docker logs to make sure the image is running without problems:
 `sudo docker logs c4rpi` or `sudo docker ps` and check if its still running.
 
-This was tested on Raspberry Pi 3 running DietPi (same as Raspbian).
-Odroid testing to come soon!
+This was tested  and is working on the following SBCs running DietPi:
+- Raspberry Pi 3
+- Odroid XU4
+- Pine Rock64 (Running 64 bit Linux)
 
 #### License
 Feel free to clone this repo and change the monitoring script `cloud4rpi_monitor.py` or the Dockerfile as you wish.
