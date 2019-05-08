@@ -8,6 +8,8 @@ import psutil
 import rpi
 import os
 import re
+import time 
+import datetime
 from statistics import mean
 pattern = re.compile("^cpu[0-9]?|soc\-thermal$")
 
@@ -18,16 +20,16 @@ pattern = re.compile("^cpu[0-9]?|soc\-thermal$")
 DEVICE_TOKEN = os.environ['TOKEN']
 
 # Constants
-DATA_SENDING_INTERVAL = 30  # secs
+DATA_SENDING_INTERVAL = 15  # secs
 DIAG_SENDING_INTERVAL = 60  # secs
-POLL_INTERVAL = 1.5  # 500 ms
+POLL_INTERVAL = 5  # seconds
 
 # Configure GPIO library
 #GPIO.setmode(GPIO.BOARD)
 #GPIO.setup(LED_PIN, GPIO.OUT)
 
 
-
+	
 # Handler for the button or switch variable
 def led_control(value=None):
 #    GPIO.output(LED_PIN, value)
@@ -61,41 +63,64 @@ def cpu_temp(value=None):
                         temp_values_arr.append(temp_val[0].current)
         return mean(temp_values_arr)
 
+def up_time(value=None):
+	boot_time = psutil.boot_time()
+	
+	seconds = int(time.time()) - int(boot_time)
+	m, s = divmod(seconds, 60)
+	h, m = divmod(m, 60)
+	d, h = divmod(h, 24)
+
+	uptime_str =  f'{d} days, {h}:{m}:{s}'
+	
+	#return as tuple:
+	return uptime_str
+
+def boot_time(value=None):
+	boot_time = psutil.boot_time()
+	last_boot_str = datetime.datetime.fromtimestamp(boot_time).strftime("%Y-%m-%d %H:%M:%S")
+	return last_boot_str
+
+
+	
 
 def main():
 
+    
+    
     variables = {
- #        'LED On': {
-#            'type': 'bool',
-#            'value': False,
-#            'bind': led_control
-#        },
-        'CPU Temp': {
-            'type': 'numeric',
-            'bind': cpu_temp
+		'CPU Temp': {
+		'type': 'numeric',
+		'bind': cpu_temp
         },
-                'CPU %': {
-                'type' : 'numeric',
-                'bind' : cpu_percent
-                },
-                'CPU freq' : {
-                'type' : 'numeric',
-                'bind' : cpu_freq
-                },
-                'Memory Usage %': {
-                'type' : 'numeric',
-                'bind' : mem_percent
-                },
-                'Swap Usage %': {
-                'type' : 'numeric',
-                'bind' : swap_percent
-                },
-                'Disk Usage %': {
-                'type' : 'numeric',
-                'bind' : disk_percent
-                }
-
-
+		'CPU %': {
+		'type' : 'numeric',
+		'bind' : cpu_percent
+		},
+		'CPU freq' : {
+		'type' : 'numeric',
+		'bind' : cpu_freq
+		},
+		'Memory Usage %': {
+		'type' : 'numeric',
+		'bind' : mem_percent
+		},
+		'Swap Usage %': {
+		'type' : 'numeric',
+		'bind' : swap_percent
+		},
+		'Disk Usage %': {
+		'type' : 'numeric',
+		'bind' : disk_percent
+		},
+		'Up Time' : {
+		'type' : 'string',
+		'bind' : up_time
+		},
+		'Last Boot Time' : {
+		'type' : 'string',
+		'bind' : boot_time
+		}
     }
 
     diagnostics = {
@@ -150,4 +175,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+	main()
