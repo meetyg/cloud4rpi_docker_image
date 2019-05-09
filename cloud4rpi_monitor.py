@@ -11,6 +11,8 @@ import re
 import time 
 import datetime
 from statistics import mean
+
+# regex pattern for reading cpu temp of various SBCs:
 pattern = re.compile("^cpu[0-9]?|soc\-thermal$")
 
 #import RPi.GPIO as GPIO  # pylint: disable=F0401
@@ -71,7 +73,7 @@ def up_time(value=None):
 	h, m = divmod(m, 60)
 	d, h = divmod(h, 24)
 
-	uptime_str =  f'{d} days, {h}:{m}:{s}'
+	uptime_str =  f'{d} days, {h:0>2}:{m:0>2}:{s:0>2}'
 	
 	#return as tuple:
 	return uptime_str
