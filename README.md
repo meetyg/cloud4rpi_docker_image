@@ -9,7 +9,17 @@
 You can pull this image from docker hub (https://hub.docker.com/r/meetyg/cloud4rpi), or build it yourself (usefull for customization).
 
 #### Run it:
-`sudo docker run -d --name c4rpi -e TOKEN=<YOUR-DEVICE-TOKEN> --hostname $(hostname) --restart unless-stopped meetyg/cloud4rpi`
+`sudo docker run -d --name c4rpi -e TOKEN=<YOUR-DEVICE-TOKEN> --hostname $(hostname) --restart unless-stopped meetyg/cloud4rpi:<architecture>`
+
+Currently the following architectures are supported:<br>
+`arm64v8` or `aarch64` - for 64 bit ARM devices<br>
+`armhf` - for 32 bit ARM devices<br>
+
+**NEW Feature:** Support for Getting Weather data from [OpenWeatherMap](https://openweathermap.org) !
+In order to get data from OpenWeatherMap, you need to register, and get an API key.
+You need to specify this key, and your city and country code (as recognized in OWM) as environment variables.
+So just add to the `docker run` command the following variables (after specifying your Cloud4Rpi token):
+`-e OWM_API_KEY=<YOUR-OWM-KEY> -e OWM_CITY_COUNTRY="London,GB"` for example.
 
 #### Build it yourself:
 
