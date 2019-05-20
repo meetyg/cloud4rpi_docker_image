@@ -13,7 +13,7 @@ You can pull this image from docker hub (https://hub.docker.com/r/meetyg/cloud4r
 
 Currently the following architectures are supported:<br>
 `arm64v8` or `aarch64` - for 64 bit ARM devices<br>
-`armhf` - for 32 bit ARM devices<br>
+`arm32v7` or `armhf` - for 32 bit ARM devices<br>
 
 **NEW Feature:** Support for Getting Weather data from [OpenWeatherMap](https://openweathermap.org) !
 In order to get data from OpenWeatherMap, you need to register, and get an API key.
