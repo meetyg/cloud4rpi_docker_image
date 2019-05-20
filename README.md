@@ -53,6 +53,8 @@ If you run into any problems open an issue, and I'll try to help as best as I ca
 Please see the Cloud4Rpi licenses and terms/conditions.
 
 #### Disclaimer
+I am **not** affiliated with Cloud4RPi in any way. 
+
 **Use this at your own risk!** <br>
 I do not take any responsability what so ever...
 
